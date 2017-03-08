@@ -584,7 +584,7 @@ vec4 Scarf(vec2 uv, float seed) {
 float PointFlower(vec2 st, float numPoints, float base, float pointiness) {
 	st.y *= 4.;
     float x = st.x*numPoints;
-    float y = pointiness*(abs(cos(x))+(.25-abs(cos(x+pi2)))*2.)/(2.+abs(cos(x*2.+pi2))*8.)-base - iMusic[2].x;
+    float y = pointiness*(abs(cos(x))+(.25-abs(cos(x+pi2)))*2.)/(2.+abs(cos(x*2.+pi2))*8.)-base - (iMusic[3].x + iMusic[2].x)*.3;
     return st.y+y;
 }
 
@@ -823,16 +823,16 @@ de castRay( ray r ) {
 
     //if( iMusic[2].x < 0.5 ) {
     //if( iMusic[2].x < 0.1 ) {
-    if(SOLO<.5) {									// we are in marching mode (as in marching matroshkas, not ray marching ;))
+    if(SOLO<.5 ) {									// we are in marching mode (as in marching matroshkas, not ray marching ;))
         // Dolls ...
         //t = iGlobalTime * 1.9;						// try to match to the beat of the music
-        t = iGlobalTime * 1.6;
+        t = iGlobalTime * 1.8;
 
         rc q;										// holds the repeated coordinate
         float pt = t*pi;							// 'polar' time
         float s = sin(pt*5.);
         //float shuffle = s*.1 + t;					// used to move dolls forward
-        float shuffle =  (iMusic[3].x > 0.5 ? s*.1 : 0.);
+        float shuffle =  (iMusic[2].y > 0.5 ? s*.1 : 0.);
         float headBounce = 1.6 - iMusic[1].w ;//s*.05 + 1.05;			// used to scale height periodically
         //float headBounce = 1.5 - iMusic[3].z ;//s*.05 + 1.05;			// used to scale height periodically
         //s = sin(pt*2.5);
@@ -844,7 +844,7 @@ de castRay( ray r ) {
             p = r.o + r.d * dO;						// Ray march
             vec3 P=p;
             p.z -= shuffle;							// move forward
-            q = Repeat(p, grid);    				// make a grid of them
+            q = Repeat(p, vec3(iMusic[3].y*10.  , iMusic[3].y*20., iMusic[3].y*10.));    				// make a grid of them
             p.xz = q.p.xz;							// keep only ground layer
             p.y *= headBounce;						// make them bounce up and down
             p *= leftRight; 						// make them sway left-right
@@ -1128,7 +1128,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     //SOLO += B(81., 107., 0.01, mt);
     //SOLO += B(134., 161., 0.01, mt);
     //SOLO += B(227., 240., 0.01, mt);
-    SOLO = abs(iMusic[0].w - 0.8);
+    SOLO = abs(iMusic[2].z + iMusic[3].w - 1.2);
 
     if(SOLO>.5) {
         camPos = vec3(0., 1.5, 0.);
