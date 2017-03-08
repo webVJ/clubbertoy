@@ -140,7 +140,7 @@
 })();
 
 (function () {
-var shaderIds = ["4dsGzH","MsjSW3","4tlSzl", "MdlXRS","lslXDn","XsXXDn","MdBSDt","MlXSWX","XsBXWt"];
+var shaderIds = ["rose","MsjSW3","4tlSzl", "MdlXRS","lslXDn","XsXXDn","MdBSDt","MlXSWX","XsBXWt"];
 
 function threshold(){
   var id=(count++)% 3;
@@ -203,7 +203,7 @@ var uniforms = {
   iMusic: new Float32Array(16),
   iCorrect: correctArray,
   iResolution: [gl.canvas.width, gl.canvas.height,0],
-  iChannel0: twgl.createTexture(gl, {src: "//wizgrav.github.io/clubber/toy/noise.png"}),  
+  iChannel0: twgl.createTexture(gl, {src: "//wizgrav.github.io/clubber/toy/noise.png"}),
   iChannelResolution: [256,256,0],
   iCorrect: correctArray
 };
@@ -212,7 +212,7 @@ var uniforms = {
 var shaders = [], currentShaders = [];
 shaderIds.forEach(function (id) {
   var shader = new Shader(gl, { 
-    source: load("//wizgrav.github.io/clubber/toy/shaders/" + id + ".fs"), 
+    source: load("//wizgrav.github.io/clubber/toy/shaders/" + id + ".fs"),
     uniforms: uniforms, 
     correct: needsCorrection
   });
