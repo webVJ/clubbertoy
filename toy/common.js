@@ -1,5 +1,5 @@
-CLIENT_ID = "ded451c6d8f9ff1c62f72523f49dab68";
-// CLIENT_ID = "56c4f3443da0d6ce6dcb60ba341c4e8d";
+//CLIENT_ID = "ded451c6d8f9ff1c62f72523f49dab68";
+CLIENT_ID = "56c4f3443da0d6ce6dcb60ba341c4e8d";
 TOY_ID = "rtrtw8";
 
 var info = document.getElementById("info");
